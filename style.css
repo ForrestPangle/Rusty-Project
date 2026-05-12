@@ -1,4 +1,4 @@
-/* Ultra-clean Apple trading service aesthetic - Chrome + Safari fixed */
+/* Ultra-clean Apple trading service aesthetic */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');
 
 :root {
@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
 }
 
-/* Navbar - Fixed for Chrome */
+/* Navbar */
 .navbar {
   padding: 24px 0;
   border-bottom: 1px solid #2C2C2E;
@@ -152,6 +152,61 @@ body {
   font-weight: 500;
 }
 
+/* Live Chart */
+.live-chart {
+  padding: 60px 0;
+  background: #0A0A0C;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.chart-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.price-display {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.price-display .positive { color: #30D158; }
+
+.price-display .negative { color: #FF453A; }
+
+.timeframe {
+  display: flex;
+  gap: 8px;
+}
+
+.timeframe button {
+  background: #1C1C1E;
+  color: #86868B;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.timeframe button.active {
+  background: #007AFF;
+  color: white;
+}
+
+.chart-container {
+  background: #1C1C1E;
+  border-radius: 20px;
+  padding: 24px;
+  height: 380px;
+}
+
 /* Features */
 .features {
   padding: 120px 0;
@@ -260,5 +315,9 @@ footer {
   .feature-grid {
     grid-template-columns: 1fr;
     gap: 60px;
+  }
+  
+  .chart-container {
+    height: 300px;
   }
 }

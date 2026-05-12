@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rusty · Trade Smarter.</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -34,6 +35,30 @@
                     <span>Used by traders at</span>
                     <span class="companies">Coinbase · Binance · Kraken</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chart Section -->
+    <section class="live-chart">
+        <div class="container">
+            <div class="chart-header">
+                <div>
+                    <h2>BTC / USDT</h2>
+                    <div class="price-display">
+                        <span id="current-price">$67,245</span>
+                        <span id="price-change" class="positive">+1.24%</span>
+                    </div>
+                </div>
+                <div class="timeframe">
+                    <button class="active">1H</button>
+                    <button>4H</button>
+                    <button>1D</button>
+                    <button>1W</button>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="priceChart"></canvas>
             </div>
         </div>
     </section>
@@ -91,5 +116,84 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Real-time Price Chart
+        let chart;
+        let priceData = [];
+        let labels = [];
+        let currentPrice = 67245;
+
+        function initChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            
+            // Generate initial data
+            for (let i = 0; i < 20; i++) {
+                labels.push('');
+                priceData.push(currentPrice + (Math.random() * 400 - 200));
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'BTC Price',
+                        data: priceData,
+                        borderColor: '#007AFF',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        backgroundColor: 'rgba(0, 122, 255, 0.1)',
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        x: { grid: { color: '#2C2C2E' }, ticks: { color: '#86868B' } },
+                        y: { grid: { color: '#2C2C2E' }, ticks: { color: '#86868B' } }
+                    },
+                    elements: {
+                        line: { tension: 0.4 }
+                    }
+                }
+            });
+
+            // Start real-time updates
+            setInterval(updatePrice, 1800);
+        }
+
+        function updatePrice() {
+            // Simulate realistic price movement
+            const change = (Math.random() * 60 - 30); // -30 to +30
+            currentPrice = Math.max(65000, Math.min(70000, currentPrice + change));
+            
+            // Update price display
+            document.getElementById('current-price').innerText = '$' + currentPrice.toFixed(0);
+            
+            const changePercent = ((currentPrice - 67245) / 67245 * 100).toFixed(2);
+            const changeEl = document.getElementById('price-change');
+            changeEl.innerText = (changePercent > 0 ? '+' : '') + changePercent + '%';
+            changeEl.className = changePercent > 0 ? 'positive' : 'negative';
+
+            // Update chart data
+            priceData.shift();
+            priceData.push(currentPrice);
+            
+            chart.update();
+        }
+
+        // Initialize everything
+        window.onload = function() {
+            initChart();
+        }
+    </script>
 </body>
 </html>
