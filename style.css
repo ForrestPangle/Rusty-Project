@@ -1,4 +1,4 @@
-/* Ultra-clean Apple trading service aesthetic */
+/* Ultra-clean Apple trading service aesthetic - Chrome + Safari fixed */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');
 
 :root {
@@ -35,13 +35,14 @@ body {
   justify-content: space-between;
 }
 
-/* Navbar */
+/* Navbar - Fixed for Chrome */
 .navbar {
   padding: 24px 0;
   border-bottom: 1px solid #2C2C2E;
   position: sticky;
   top: 0;
   background: rgba(0,0,0,0.95);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 100;
 }
