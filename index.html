@@ -12,17 +12,14 @@
     <nav class="navbar">
         <div class="container flex">
             <div class="logo">Rusty</div>
-            <div class="nav-right">
-                <a href="#">Features</a>
-                <a href="#">Learn</a>
-                <button class="btn btn-ghost" onclick="showLoginModal()">Log in</button>
-                <button class="btn btn-primary" onclick="showSignupModal()">Get started free</button>
+            <div class="nav-right" id="nav-right">
+                <!-- Dynamic content based on login state -->
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
+    <!-- Hero (only shown when not logged in) -->
+    <section class="hero" id="hero-section">
         <div class="container">
             <div class="hero-inner">
                 <div class="badge">Public beta</div>
@@ -41,7 +38,46 @@
         </div>
     </section>
 
-    <!-- Live Multi-Coin Chart -->
+    <!-- Portfolio Dashboard (shown when logged in) -->
+    <section class="portfolio-dashboard" id="portfolio-section" style="display: none;">
+        <div class="container">
+            <div class="portfolio-header">
+                <div>
+                    <h1>Welcome back!</h1>
+                    <p class="portfolio-subtitle">Here's your portfolio overview</p>
+                </div>
+                <div class="portfolio-balance">
+                    <div class="balance-label">Total Portfolio Value</div>
+                    <div class="balance-value" id="portfolio-value">$124,872.45</div>
+                    <div class="balance-change positive">+2.67% today</div>
+                </div>
+            </div>
+
+            <div class="portfolio-stats">
+                <div class="stat-card">
+                    <div class="stat-label">Available Cash</div>
+                    <div class="stat-value" id="cash-balance">$87,420</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total P&amp;L</div>
+                    <div class="stat-value positive" id="total-pnl">+$37,452</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Win Rate</div>
+                    <div class="stat-value" id="win-rate">68%</div>
+                </div>
+            </div>
+
+            <div class="holdings-section">
+                <h3>Your Holdings</h3>
+                <div class="holdings-table" id="holdings-table">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chart -->
     <section class="live-chart">
         <div class="container">
             <div class="chart-header">
@@ -64,10 +100,10 @@
                     </div>
                 </div>
                 <div class="timeframe">
-                    <button onclick="changeTimeframe(1)" class="active" data-tf="1">1H</button>
-                    <button onclick="changeTimeframe(4)" data-tf="4">4H</button>
-                    <button onclick="changeTimeframe(24)" data-tf="24">1D</button>
-                    <button onclick="changeTimeframe(168)" data-tf="168">1W</button>
+                    <button onclick="changeTimeframe(1, this)" class="active" data-tf="1">1H</button>
+                    <button onclick="changeTimeframe(4, this)" data-tf="4">4H</button>
+                    <button onclick="changeTimeframe(24, this)" data-tf="24">1D</button>
+                    <button onclick="changeTimeframe(168, this)" data-tf="168">1W</button>
                 </div>
             </div>
             <div class="chart-container">
@@ -80,8 +116,7 @@
     <section class="features">
         <div class="container">
             <div class="features-header">
-                <h2>Designed for serious traders.</h2>
-                <p>Everything you need to build real skill — without the real risk.</p>
+                <h2>Everything you need to become a better trader.</h2>
             </div>
 
             <div class="feature-grid">
@@ -109,8 +144,8 @@
         </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta">
+    <!-- Final CTA (only for non-logged in users) -->
+    <section class="final-cta" id="final-cta">
         <div class="container">
             <h2>Ready to trade with confidence?</h2>
             <p>Join 12,847 traders already practicing on Rusty.</p>
@@ -148,7 +183,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-top: 20px;">Create Account</button>
             </form>
-            <p class="modal-note">Your data is stored securely in your browser (demo mode).</p>
+            <p class="modal-note">Demo mode — data stored in your browser</p>
         </div>
     </div>
 
@@ -172,7 +207,7 @@
     </div>
 
     <script>
-        // Chart variables
+        // === CHART & TRADING VARIABLES ===
         let chart;
         let priceData = [];
         let labels = [];
@@ -180,20 +215,13 @@
         let currentCoin = 'BTC';
         let currentTimeframe = 1;
 
-        // Top 10 coins base prices
         const coinPrices = {
-            'BTC': 67245,
-            'ETH': 3124,
-            'SOL': 178,
-            'XRP': 0.62,
-            'ADA': 0.48,
-            'AVAX': 38.5,
-            'DOGE': 0.18,
-            'SHIB': 0.000024,
-            'LINK': 17.8,
-            'LTC': 82.4
+            'BTC': 67245, 'ETH': 3124, 'SOL': 178, 'XRP': 0.62,
+            'ADA': 0.48, 'AVAX': 38.5, 'DOGE': 0.18, 'SHIB': 0.000024,
+            'LINK': 17.8, 'LTC': 82.4
         };
 
+        // === INITIALIZE CHART ===
         function initChart() {
             const ctx = document.getElementById('priceChart').getContext('2d');
             
@@ -232,7 +260,7 @@
         }
 
         function updatePrice() {
-            const volatility = currentCoin === 'BTC' || currentCoin === 'ETH' ? 45 : 8;
+            const volatility = (currentCoin === 'BTC' || currentCoin === 'ETH') ? 45 : 8;
             const change = (Math.random() * volatility * 2) - volatility;
             currentPrice = Math.max(coinPrices[currentCoin] * 0.85, Math.min(coinPrices[currentCoin] * 1.15, currentPrice + change));
             
@@ -252,7 +280,6 @@
             currentCoin = document.getElementById('coin-select').value;
             currentPrice = coinPrices[currentCoin];
             
-            // Reset chart data
             priceData = [];
             for (let i = 0; i < 24; i++) {
                 priceData.push(currentPrice + (Math.random() * 80 - 40));
@@ -265,14 +292,12 @@
             document.getElementById('current-price').innerText = '$' + currentPrice.toFixed(currentCoin === 'SHIB' ? 8 : 2);
         }
 
-        function changeTimeframe(hours) {
+        function changeTimeframe(hours, element) {
             currentTimeframe = hours;
             
-            // Update active button
             document.querySelectorAll('.timeframe button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            element.classList.add('active');
             
-            // Simulate different data density
             const points = hours <= 4 ? 24 : (hours <= 24 ? 18 : 12);
             priceData = [];
             for (let i = 0; i < points; i++) {
@@ -283,13 +308,12 @@
             chart.update();
         }
 
-        // Account System (using localStorage + simple encryption simulation)
+        // === ACCOUNT SYSTEM ===
         function createAccount(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Simple encryption simulation (base64 + salt for demo)
             const encryptedPass = btoa(password + 'rusty_salt_2026');
 
             const user = {
@@ -297,17 +321,13 @@
                 password: encryptedPass,
                 created: new Date().toISOString(),
                 balance: 100000,
-                holdings: {}
+                holdings: { 'BTC': 0.5, 'ETH': 2.3 }
             };
 
             localStorage.setItem('rusty_user', JSON.stringify(user));
             closeModal('signup-modal');
-            alert('Account created successfully! Welcome to Rusty. (Demo mode - data saved in browser)');
-            
-            // Auto login
-            setTimeout(() => {
-                window.location.reload();
-            }, 1200);
+            alert('Account created! Welcome to Rusty.');
+            setTimeout(() => window.location.reload(), 800);
         }
 
         function loginUser(e) {
@@ -315,45 +335,117 @@
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
-            const user = JSON.parse(localStorage.getItem('rusty_user'));
+            const user = JSON.parse(localStorage.getItem('rusty_user') || '{}');
 
-            if (user && user.email === email) {
+            if (user.email === email) {
                 const decrypted = atob(user.password).replace('rusty_salt_2026', '');
                 if (decrypted === password) {
                     closeModal('login-modal');
-                    alert('Login successful! Welcome back.');
+                    alert('Login successful!');
+                    setTimeout(() => window.location.reload(), 600);
                 } else {
                     alert('Incorrect password');
                 }
             } else {
-                alert('No account found with that email');
+                alert('No account found');
             }
         }
 
-        function showSignupModal() {
-            document.getElementById('signup-modal').style.display = 'block';
+        function logout() {
+            localStorage.removeItem('rusty_user');
+            window.location.reload();
         }
 
-        function showLoginModal() {
-            document.getElementById('login-modal').style.display = 'block';
+        function showAccountDropdown() {
+            const dropdown = document.getElementById('account-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
+        // === RENDER NAV BASED ON LOGIN STATE ===
+        function renderNav() {
+            const navRight = document.getElementById('nav-right');
+            const user = JSON.parse(localStorage.getItem('rusty_user') || 'null');
+
+            if (user) {
+                // Logged in state
+                navRight.innerHTML = `
+                    <div class="account-menu" onclick="showAccountDropdown()">
+                        <div class="account-btn">
+                            <span>${user.email.split('@')[0]}</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div id="account-dropdown" class="dropdown-menu">
+                            <a href="#">Portfolio</a>
+                            <a href="#">Settings</a>
+                            <a href="#">Help &amp; Support</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" onclick="logout()">Log out</a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Not logged in
+                navRight.innerHTML = `
+                    <a href="#">Features</a>
+                    <a href="#">Learn</a>
+                    <button class="btn btn-ghost" onclick="showLoginModal()">Log in</button>
+                    <button class="btn btn-primary" onclick="showSignupModal()">Get started free</button>
+                `;
+            }
         }
 
-        // Initialize
+        // === SHOW/HIDE SECTIONS BASED ON LOGIN ===
+        function updateUIForLoginState() {
+            const user = JSON.parse(localStorage.getItem('rusty_user') || 'null');
+            const hero = document.getElementById('hero-section');
+            const portfolio = document.getElementById('portfolio-section');
+            const cta = document.getElementById('final-cta');
+
+            if (user) {
+                hero.style.display = 'none';
+                portfolio.style.display = 'block';
+                cta.style.display = 'none';
+
+                // Populate portfolio data
+                document.getElementById('portfolio-value').innerText = '$' + user.balance.toLocaleString();
+                document.getElementById('cash-balance').innerText = '$' + user.balance.toLocaleString();
+                
+                // Simple holdings display
+                const holdingsHTML = Object.entries(user.holdings || {}).map(([coin, amount]) => `
+                    <div class="holding-row">
+                        <div>${coin}</div>
+                        <div>${amount} ${coin}</div>
+                        <div>$${(amount * (coinPrices[coin] || 100)).toFixed(2)}</div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('holdings-table').innerHTML = holdingsHTML || '<p>No holdings yet</p>';
+            } else {
+                hero.style.display = 'block';
+                portfolio.style.display = 'none';
+                cta.style.display = 'block';
+            }
+        }
+
+        function showSignupModal() { document.getElementById('signup-modal').style.display = 'block'; }
+        function showLoginModal() { document.getElementById('login-modal').style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // === INITIALIZE EVERYTHING ===
         window.onload = function() {
             initChart();
-            
-            // Check if user is logged in
-            const user = localStorage.getItem('rusty_user');
-            if (user) {
-                console.log('User logged in (demo)');
-            }
+            renderNav();
+            updateUIForLoginState();
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                const dropdown = document.getElementById('account-dropdown');
+                if (dropdown && !e.target.closest('.account-menu')) {
+                    dropdown.style.display = 'none';
+                }
+            });
         };
 
-        // Close modals when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = 'none';
