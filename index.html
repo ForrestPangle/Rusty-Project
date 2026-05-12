@@ -3,188 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rusty · Crypto Trading Simulator</title>
+    <title>Rusty · Trade Crypto. Practice First.</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="container flex">
-            <div class="logo">
-                <span class="logo-text">Rusty</span>
-            </div>
-            <div class="nav-links">
-                <a href="#dashboard" class="active">Dashboard</a>
-                <a href="#markets">Markets</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#trade">Trade</a>
-            </div>
-            <div class="nav-right">
-                <div class="account-badge">Demo Account</div>
+        <div class="container">
+            <div class="logo">Rusty</div>
+            <div class="nav-actions">
+                <a href="#" class="nav-link">Features</a>
+                <a href="#" class="nav-link">How it works</a>
+                <button class="btn btn-secondary">Log in</button>
+                <button class="btn btn-primary">Get started</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero / Portfolio Overview -->
-    <section class="hero" id="dashboard">
+    <!-- Hero -->
+    <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Trade with confidence.</h1>
-                    <p class="lead">Practice crypto trading in a realistic environment. No risk. Real experience.</p>
+                <div class="badge">Now in public beta</div>
+                <h1>Practice trading.<br>Build confidence.<br>Trade for real.</h1>
+                <p class="hero-subtitle">Rusty is the most realistic crypto trading simulator. Trade Bitcoin, Ethereum, and 50+ coins with virtual money. No risk. Real experience.</p>
+                
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-large" onclick="document.getElementById('signup').scrollIntoView({ behavior: 'smooth' })">Start trading for free</button>
+                    <a href="#how" class="watch-video">
+                        <i class="fas fa-play"></i> Watch 1:12 video
+                    </a>
                 </div>
-
-                <div class="portfolio-card card">
-                    <div class="portfolio-header">
-                        <span>Total Portfolio Value</span>
-                        <div class="portfolio-value">$124,872.45</div>
-                        <div class="portfolio-change positive">
-                            <i class="fas fa-arrow-up"></i> +$3,248.12 (2.67%)
-                        </div>
-                    </div>
-                    <div class="portfolio-stats">
-                        <div class="stat">
-                            <span>24h P&amp;L</span>
-                            <strong class="positive">+$1,892</strong>
-                        </div>
-                        <div class="stat">
-                            <span>Win Rate</span>
-                            <strong>68%</strong>
-                        </div>
-                        <div class="stat">
-                            <span>Open Positions</span>
-                            <strong>4</strong>
-                        </div>
-                    </div>
+                
+                <div class="trust">
+                    <div>Trusted by <strong>12,847</strong> traders</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Key Stats -->
-    <section class="stats" id="portfolio">
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-logos">
+                <span>Featured in</span>
+                <span>CoinDesk</span>
+                <span>TechCrunch</span>
+                <span>Forbes</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <section class="features">
         <div class="container">
             <div class="section-header">
-                <h2>Your Performance</h2>
+                <h2>Everything you need to become a better trader.</h2>
+                <p>Realistic market conditions. Live price feeds. Advanced order types. All in a safe environment.</p>
             </div>
-            <div class="stats-grid">
-                <div class="stat-card card">
-                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="stat-info">
-                        <div class="stat-value">1,284</div>
-                        <div class="stat-label">Total Trades</div>
-                    </div>
+
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Real market data</h3>
+                    <p>Live prices from actual exchanges. Experience real volatility and liquidity.</p>
                 </div>
-                <div class="stat-card card">
-                    <div class="stat-icon"><i class="fas fa-trophy"></i></div>
-                    <div class="stat-info">
-                        <div class="stat-value">68%</div>
-                        <div class="stat-label">Win Rate</div>
-                    </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Smart order types</h3>
+                    <p>Limit, market, stop-loss, and trailing stops. Trade exactly how professionals do.</p>
                 </div>
-                <div class="stat-card card">
-                    <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
-                    <div class="stat-info">
-                        <div class="stat-value">$87,420</div>
-                        <div class="stat-label">Total Profit</div>
-                    </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-history"></i></div>
+                    <h3>Full trade history</h3>
+                    <p>Review every trade with detailed analytics and performance tracking.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Zero risk</h3>
+                    <p>Trade with virtual funds. Learn without losing real money.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trade Section -->
-    <section class="trade-section" id="trade">
+    <!-- How it works -->
+    <section class="how" id="how">
         <div class="container">
             <div class="section-header">
-                <h2>Quick Trade</h2>
+                <h2>Start trading in under 60 seconds.</h2>
             </div>
-
-            <div class="trade-grid">
-                <!-- Trade Panel -->
-                <div class="trade-panel card">
-                    <h3>Place Order</h3>
-                    <div class="form-group">
-                        <label>Asset</label>
-                        <select id="asset">
-                            <option>BTC / USDT</option>
-                            <option>ETH / USDT</option>
-                            <option>SOL / USDT</option>
-                            <option>AVAX / USDT</option>
-                        </select>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Create your free account</h4>
+                        <p>Sign up in seconds. No credit card required.</p>
                     </div>
-                    <div class="form-group">
-                        <label>Amount (USD)</label>
-                        <input type="number" id="amount" value="1000">
-                    </div>
-                    <div class="trade-actions">
-                        <button class="btn btn-buy" onclick="simulateTrade('buy')">Buy</button>
-                        <button class="btn btn-sell" onclick="simulateTrade('sell')">Sell</button>
-                    </div>
-                    <div id="trade-result" class="trade-result"></div>
                 </div>
-
-                <!-- Live Prices -->
-                <div class="price-panel card">
-                    <h3>Live Prices</h3>
-                    <div class="price-list">
-                        <div class="price-row">
-                            <div class="coin">BTC</div>
-                            <div class="price" id="btc-price">$67,245</div>
-                            <div class="change positive">+1.2%</div>
-                        </div>
-                        <div class="price-row">
-                            <div class="coin">ETH</div>
-                            <div class="price" id="eth-price">$3,124</div>
-                            <div class="change positive">+0.8%</div>
-                        </div>
-                        <div class="price-row">
-                            <div class="coin">SOL</div>
-                            <div class="price" id="sol-price">$178.45</div>
-                            <div class="change negative">-0.4%</div>
-                        </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Get $100,000 in virtual funds</h4>
+                        <p>Start with realistic capital to practice with.</p>
                     </div>
-                    <p class="update-note">Prices update live (simulated)</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Trade like the pros</h4>
+                        <p>Practice with real market conditions and advanced tools.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script>
-        function updatePrices() {
-            const btc = document.getElementById('btc-price');
-            const eth = document.getElementById('eth-price');
-            const sol = document.getElementById('sol-price');
+    <!-- Final CTA -->
+    <section class="final-cta" id="signup">
+        <div class="container">
+            <h2>Ready to become a better trader?</h2>
+            <p>Join thousands of traders practicing on Rusty every day.</p>
+            <button class="btn btn-primary btn-large">Create free account</button>
+            <div class="fine-print">No credit card required. Cancel anytime.</div>
+        </div>
+    </section>
 
-            setInterval(() => {
-                btc.innerHTML = '$' + (67245 + Math.floor(Math.random() * 80) - 40);
-                eth.innerHTML = '$' + (3124 + Math.floor(Math.random() * 18) - 9);
-                sol.innerHTML = '$' + (178.45 + (Math.random() * 0.9 - 0.45)).toFixed(2);
-            }, 2800);
-        }
-
-        function simulateTrade(type) {
-            const asset = document.getElementById('asset').value;
-            const amount = document.getElementById('amount').value;
-            const result = document.getElementById('trade-result');
-
-            result.className = 'trade-result ' + type;
-            if (type === 'buy') {
-                result.innerHTML = `Bought <strong>${amount} USD</strong> of ${asset}`;
-            } else {
-                result.innerHTML = `Sold <strong>${amount} USD</strong> of ${asset}`;
-            }
-
-            setTimeout(() => {
-                result.innerHTML = '';
-                result.className = 'trade-result';
-            }, 2200);
-        }
-
-        window.onload = function() {
-            updatePrices();
-        }
-    </script>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Rusty</div>
+                <div class="footer-links">
+                    <a href="#">Twitter</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Rusty. All rights reserved.
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
