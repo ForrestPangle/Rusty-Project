@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rusty | Crypto Trading Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="utilities.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="container flex">
+            <h1 class="logo">Rusty</h1>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#markets">Markets</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#trade">Trade</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero / Portfolio Overview -->
+    <section class="showcase" id="dashboard">
+        <div class="container grid">
+            <div class="showcase-text">
+                <h1>Simulate. Trade. Win.</h1>
+                <h3>Real-time Crypto Trading Simulator</h3>
+                <p>Practice trading Bitcoin, Ethereum, and more with virtual funds. No risk. All the thrill.</p>
+                <a href="#trade" class="btn btn-primary">Start Trading</a>
+            </div>
+
+            <div class="showcase-form card">
+                <h2>Portfolio Overview</h2>
+                <div class="portfolio-value">
+                    <h3>$124,872.45</h3>
+                    <p class="text-success">+ $3,248.12 (2.67%) <i class="fas fa-arrow-up"></i></p>
+                </div>
+                <div class="stats-mini">
+                    <div>24h P&amp;L: <span class="text-success">+$1,892</span></div>
+                    <div>Win Rate: <span>68%</span></div>
+                    <div>Open Positions: <span>4</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Stats -->
+    <section class="stats" id="portfolio">
+        <div class="container">
+            <h3 class="stats-heading text-center my-1">Your Trading Stats</h3>
+            <div class="grid grid-3 text-center my-4">
+                <div class="card">
+                    <i class="fas fa-chart-line fa-3x"></i>
+                    <h3>1,284</h3>
+                    <p class="text-secondary">Total Trades</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-trophy fa-3x"></i>
+                    <h3>68%</h3>
+                    <p class="text-secondary">Win Rate</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-dollar-sign fa-3x"></i>
+                    <h3>$87,420</h3>
+                    <p class="text-secondary">Total Profit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Trade Section -->
+    <section class="cli" id="trade">
+        <div class="container grid">
+            <div class="card">
+                <h3>Quick Trade</h3>
+                <div class="trade-panel">
+                    <div class="form-control">
+                        <label>Asset</label>
+                        <select id="asset">
+                            <option>BTC/USDT</option>
+                            <option>ETH/USDT</option>
+                            <option>SOL/USDT</option>
+                            <option>AVAX/USDT</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label>Amount (USD)</label>
+                        <input type="number" id="amount" value="1000" placeholder="1000">
+                    </div>
+                    <div class="trade-buttons">
+                        <button class="btn btn-success" onclick="simulateTrade('buy')">BUY</button>
+                        <button class="btn btn-danger" onclick="simulateTrade('sell')">SELL</button>
+                    </div>
+                    <p id="trade-result" class="text-center mt-2"></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Live Price Feed</h3>
+                <div class="price-feed">
+                    <div class="price-row"><span>BTC</span> <span id="btc-price">$67,245</span> <span class="text-success">+1.2%</span></div>
+                    <div class="price-row"><span>ETH</span> <span id="eth-price">$3,124</span> <span class="text-success">+0.8%</span></div>
+                    <div class="price-row"><span>SOL</span> <span id="sol-price">$178.45</span> <span class="text-danger">-0.4%</span></div>
+                </div>
+                <p class="text-center text-secondary mt-2"><small>Prices update every 3 seconds (simulated)</small></p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fake live price updates
+        function updatePrices() {
+            const btc = document.getElementById('btc-price');
+            const eth = document.getElementById('eth-price');
+            const sol = document.getElementById('sol-price');
+
+            setInterval(() => {
+                btc.innerHTML = '$' + (67245 + Math.floor(Math.random() * 120) - 60);
+                eth.innerHTML = '$' + (3124 + Math.floor(Math.random() * 25) - 12);
+                sol.innerHTML = '$' + (178.45 + (Math.random() * 1.2 - 0.6)).toFixed(2);
+            }, 3000);
+        }
+
+        function simulateTrade(type) {
+            const asset = document.getElementById('asset').value;
+            const amount = document.getElementById('amount').value;
+            const result = document.getElementById('trade-result');
+
+            if (type === 'buy') {
+                result.innerHTML = `<span class="text-success">Bought ${amount} USD of ${asset}!</span>`;
+            } else {
+                result.innerHTML = `<span class="text-danger">Sold ${amount} USD of ${asset}!</span>`;
+            }
+
+            setTimeout(() => {
+                result.innerHTML = '';
+            }, 2500);
+        }
+
+        // Start price simulation
+        window.onload = function() {
+            updatePrices();
+        }
+    </script>
+</body>
+</html>
