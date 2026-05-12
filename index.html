@@ -3,146 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rusty · Trade Crypto. Practice First.</title>
+    <title>Rusty · Trade Smarter.</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container flex">
             <div class="logo">Rusty</div>
-            <div class="nav-actions">
-                <a href="#" class="nav-link">Features</a>
-                <a href="#" class="nav-link">How it works</a>
-                <button class="btn btn-secondary">Log in</button>
-                <button class="btn btn-primary">Get started</button>
+            <div class="nav-right">
+                <a href="#">Features</a>
+                <a href="#">Learn</a>
+                <button class="btn btn-ghost">Log in</button>
+                <button class="btn btn-primary">Get started free</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="badge">Now in public beta</div>
-                <h1>Practice trading.<br>Build confidence.<br>Trade for real.</h1>
-                <p class="hero-subtitle">Rusty is the most realistic crypto trading simulator. Trade Bitcoin, Ethereum, and 50+ coins with virtual money. No risk. Real experience.</p>
+            <div class="hero-inner">
+                <div class="badge">Public beta</div>
+                <h1>Trade crypto.<br>Practice first.</h1>
+                <p class="subtitle">The most elegant way to learn trading. Realistic markets. Zero risk.</p>
                 
-                <div class="hero-actions">
-                    <button class="btn btn-primary btn-large" onclick="document.getElementById('signup').scrollIntoView({ behavior: 'smooth' })">Start trading for free</button>
-                    <a href="#how" class="watch-video">
-                        <i class="fas fa-play"></i> Watch 1:12 video
-                    </a>
+                <div class="cta-group">
+                    <button class="btn btn-primary btn-large">Start for free</button>
                 </div>
                 
-                <div class="trust">
-                    <div>Trusted by <strong>12,847</strong> traders</div>
+                <div class="trust-bar">
+                    <span>Used by traders at</span>
+                    <span class="companies">Coinbase · Binance · Kraken</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-        <div class="container">
-            <div class="trust-logos">
-                <span>Featured in</span>
-                <span>CoinDesk</span>
-                <span>TechCrunch</span>
-                <span>Forbes</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features -->
     <section class="features">
         <div class="container">
-            <div class="section-header">
-                <h2>Everything you need to become a better trader.</h2>
-                <p>Realistic market conditions. Live price feeds. Advanced order types. All in a safe environment.</p>
+            <div class="features-header">
+                <h2>Designed for serious traders.</h2>
+                <p>Everything you need to build real skill — without the real risk.</p>
             </div>
 
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Real market data</h3>
-                    <p>Live prices from actual exchanges. Experience real volatility and liquidity.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📈</div>
+                    <h3>Live market data</h3>
+                    <p>Real prices. Real volatility. Real liquidity from actual exchanges.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                    <h3>Smart order types</h3>
-                    <p>Limit, market, stop-loss, and trailing stops. Trade exactly how professionals do.</p>
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Professional tools</h3>
+                    <p>Limit orders, stop-loss, trailing stops, and advanced charting.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-history"></i></div>
-                    <h3>Full trade history</h3>
-                    <p>Review every trade with detailed analytics and performance tracking.</p>
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Detailed analytics</h3>
+                    <p>Track your performance with institutional-grade reporting.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Zero risk</h3>
-                    <p>Trade with virtual funds. Learn without losing real money.</p>
+                <div class="feature-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Completely safe</h3>
+                    <p>Trade with virtual capital. Learn without losing a cent.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How it works -->
-    <section class="how" id="how">
+    <section class="final-cta">
         <div class="container">
-            <div class="section-header">
-                <h2>Start trading in under 60 seconds.</h2>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Create your free account</h4>
-                        <p>Sign up in seconds. No credit card required.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Get $100,000 in virtual funds</h4>
-                        <p>Start with realistic capital to practice with.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Trade like the pros</h4>
-                        <p>Practice with real market conditions and advanced tools.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="final-cta" id="signup">
-        <div class="container">
-            <h2>Ready to become a better trader?</h2>
-            <p>Join thousands of traders practicing on Rusty every day.</p>
-            <button class="btn btn-primary btn-large">Create free account</button>
-            <div class="fine-print">No credit card required. Cancel anytime.</div>
+            <h2>Ready to trade with confidence?</h2>
+            <p>Join 12,847 traders already practicing on Rusty.</p>
+            <button class="btn btn-primary btn-large">Create your free account</button>
+            <div class="small">No credit card required. Start trading in seconds.</div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="logo">Rusty</div>
+            <div class="footer-flex">
+                <div>Rusty · 2026</div>
                 <div class="footer-links">
                     <a href="#">Twitter</a>
                     <a href="#">Discord</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Support</a>
+                    <a href="#">Privacy</a>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                © 2026 Rusty. All rights reserved.
             </div>
         </div>
     </footer>
